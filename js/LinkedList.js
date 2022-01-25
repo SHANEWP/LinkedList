@@ -57,8 +57,7 @@ class LinkedList {
           for (let i = 0; i < index - 1; i++) {
             current = current.link;
           }
-          let temp = current;
-          current.link = new Node(data, temp.link);
+          current.link = new Node(data, current.link);
           this.length++;
         } else {
           this.insertFirst(data);
@@ -134,6 +133,34 @@ class LinkedList {
       }
     } else {
       throw new Error("node does not exist");
+    }
+  }
+  /**
+   * Removes the node at the given index
+   * @param {int} index
+   * @returns The removed node
+   */
+  removeAt(index) {
+    if (!Number.isInteger(index) || index < 0) {
+      throw new Error("index must be a positive integer");
+    }
+    if (index >= this.length) {
+      throw new Error("index out of bounds");
+    }
+    if (index === 0) {
+      return this.removeFirst();
+    } else if (index === 1) {
+      let removedNode = this.head.link;
+      this.head.link = this.head.link.link;
+      return removedNode;
+    } else {
+      let current = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        current = current.link;
+      }
+      let removedNode = current.link;
+      current.link = current.link.link;
+      return removedNode;
     }
   }
 }
