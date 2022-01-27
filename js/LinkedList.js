@@ -1,131 +1,129 @@
 /**
- * A node that holds a piece of data and a link to another node
- */
-class Node {
-  constructor(data = null, link = null) {
-    this.data = data;
-    this.link = link;
-  }
-}
-
-/**
  * A collection of data stored in nodes that are linked to the next node in the list
  */
-class LinkedList {
-  constructor() {
-    this.head = null; //First node
-    this.tail = null; //Last node
-    this.length = 0; //Node count
+const linkedList = function () {
+  let head = null; //First node
+  let tail = null; //Last Node
+  let length = 0; //Node count
+
+  /**
+   * A node that holds a piece of data and a link to another node
+   */
+  class Node {
+    constructor(data = null, link = null) {
+      this.data = data;
+      this.link = link;
+    }
   }
   /**
    * Adds given data to the beginning of the list
    * @param {*} data
    * @returns The head of the list
    */
-  insertFirst(data) {
-    this.head = new Node(data, this.head);
-    this.tail = this.length == 0 ? this.head : this.tail;
-    this.length++;
-    return this.head;
-  }
+  const insertFirst = function (data) {
+    head = new Node(data, head);
+    tail = length == 0 ? head : tail;
+    length++;
+    return head;
+  };
   /**
    * Adds given data to the end of the list
    * @param {*} data
    * @returns The head of the list
    */
-  insertLast(data) {
-    if (this.head) {
-      this.tail.link = new Node(data);
-      this.tail = this.tail.link;
-      this.length++;
-      return this.head;
+  const insertLast = function (data) {
+    if (head) {
+      tail.link = new Node(data);
+      tail = tail.link;
+      length++;
+      return head;
     } else {
-      return this.insertFirst(data);
+      return insertFirst(data);
     }
-  }
+  };
   /**
    * Adds given data to the list at the given index
    * @param {*} data
    * @param {int} index
    * @returns The head of the list
    */
-  insertAt(data, index) {
+  const insertAt = function (data, index) {
     if (Number.isInteger(index) && index >= 0) {
-      if (index < this.length) {
+      if (index < length) {
         if (index > 0) {
-          let current = this.head;
+          let current = head;
           for (let i = 0; i < index - 1; i++) {
             current = current.link;
           }
           current.link = new Node(data, current.link);
-          this.length++;
+          length++;
         } else {
-          this.insertFirst(data);
+          insertFirst(data);
         }
-        return this.head;
+        return head;
       } else {
         throw new Error("index out of bounds");
       }
     } else {
       throw new Error("index must be a positive integer");
     }
-  }
+  };
   /**
    * Removes the first node in the list
    * @returns The removed node
    */
-  removeFirst() {
-    if (this.head) {
-      let removedNode = this.head;
-      this.head = this.head.link;
-      this.length--;
+  const removeFirst = function () {
+    if (head) {
+      let removedNode = head;
+      head = head.link;
+      length--;
       return removedNode;
     } else {
       throw new Error("node does not exist");
     }
-  }
+  };
   /**
    * Removes the last node in the list
    * @returns The removed node
    */
-  removeLast() {
-    if (this.head) {
-      let removedNode = this.tail;
-      if (this.head === this.tail) {
-        this.head = null;
-        this.tail = null;
-        this.length = 0;
+  const removeLast = function () {
+    if (head) {
+      let removedNode = tail;
+      if (head === tail) {
+        head = null;
+        tail = null;
+        length = 0;
       } else {
-        let current = this.head;
-        while (current.link != this.tail) {
+        let current = head;
+        while (current.link != tail) {
           current = current.link;
         }
         current.link = null;
-        this.tail = current;
-        this.length--;
+        tail = current;
+        length--;
       }
       return removedNode;
     } else {
       throw new Error("node does not exist");
     }
-  }
+  };
   /**
    * Removes the first instance of the given data from the list
    * @param {*} data
    * @returns The removed node
    */
-  remove(data) {
-    if (this.head) {
-      if (this.head.data === data) {
-        return this.removeFirst();
+  const remove = function (data) {
+    if (head) {
+      if (head.data === data) {
+        return removeFirst();
       } else {
-        let current = this.head;
+        let current = head;
         let removedNode = null;
         while (current.link) {
           if (current.link.data === data) {
             removedNode = current.link;
             current.link = current.link.link;
-            this.length--;
+            length--;
           }
           current = current.link;
         }
@@ -134,27 +132,27 @@ class LinkedList {
     } else {
       throw new Error("node does not exist");
     }
-  }
+  };
   /**
    * Removes the node at the given index
    * @param {int} index
    * @returns The removed node
    */
-  removeAt(index) {
+  const removeAt = function (index) {
     if (!Number.isInteger(index) || index < 0) {
       throw new Error("index must be a positive integer");
     }
-    if (index >= this.length) {
+    if (index >= length) {
       throw new Error("index out of bounds");
     }
     if (index === 0) {
-      return this.removeFirst();
+      return removeFirst();
     } else if (index === 1) {
-      let removedNode = this.head.link;
-      this.head.link = this.head.link.link;
+      let removedNode = head.link;
+      head.link = head.link.link;
       return removedNode;
     } else {
-      let current = this.head;
+      let current = head;
       for (let i = 0; i < index - 1; i++) {
         current = current.link;
       }
@@ -162,7 +160,35 @@ class LinkedList {
       current.link = current.link.link;
       return removedNode;
     }
-  }
-}
+  };
+  /**
+   * Gets the first node of the list
+   * @returns head
+   */
+  const getHead = () => head;
+  /**
+   * Gets the last node of the list
+   * @returns tail
+   */
+  const getTail = () => tail;
+  /**
+   * Gets the number of nodes in the list
+   * @returns length
+   */
+  const getLength = () => length;
 
-export { LinkedList };
+  return {
+    getHead,
+    getTail,
+    getLength,
+    insertFirst,
+    insertLast,
+    insertAt,
+    removeFirst,
+    removeLast,
+    remove,
+    removeAt,
+  };
+};
+
+export { linkedList };

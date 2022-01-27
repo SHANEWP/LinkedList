@@ -1,28 +1,27 @@
-import { LinkedList } from "./LinkedList.js";
+import { linkedList } from "./LinkedList.js";
 
-const list = new LinkedList();
+const list = linkedList();
 // tests for exception
-// list.removeLast();
 // list.removeLast();
 
 for (let i = 0; i < 10; i++) {
   list.insertLast(`Data ${i}`);
 }
 
-// list.remove("hello");
-// list.insertAt("2.5", 3);
-// list.insertFirst("0");
-// list.insertAt("-1", 0);
-// list.insertAt("Hi", 1);
+list.remove("hello");
+list.insertAt("2.5", 3);
+list.insertFirst("0");
+list.insertAt("-1", 0);
+list.insertAt("Hi", 1);
 
-// list.remove("-1");
-// list.remove("2.5");
-// list.remove(123);
-// list.removeFirst();
-// list.removeLast();
+list.remove("-1");
+list.remove("2.5");
+list.remove(123);
+list.removeFirst();
+list.removeLast();
 
-// list.removeAt(0);
-// list.removeAt(1);
+list.removeAt(0);
+list.removeAt(1);
 list.removeAt(3);
 
 // tests for exceptions
@@ -32,4 +31,6 @@ list.removeAt(3);
 // list.removeAt(-1);
 // list.removeAt(100);
 
-console.log(list);
+console.log(list.getHead());
+console.log(list.getTail());
+console.log(list.getLength());
