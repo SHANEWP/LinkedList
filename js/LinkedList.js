@@ -16,6 +16,18 @@ const linkedList = function () {
     }
   }
   /**
+   * Checks if the given index is valid and throws an Error if it is not
+   * @param {int} index
+   */
+  const indexErrorCheck = function (index) {
+    if (!Number.isInteger(index) || index < 0) {
+      throw new Error("index must be a positive integer");
+    }
+    if (index >= length) {
+      throw new Error("index out of bounds");
+    }
+  };
+  /**
    * Adds given data to the beginning of the list
    * @param {*} data
    * @returns The head of the list
@@ -48,12 +60,7 @@ const linkedList = function () {
    * @returns The head of the list
    */
   const insertAt = function (data, index) {
-    if (index > length - 1) {
-      throw new Error("index out of bounds");
-    }
-    if (!Number.isInteger(index) || index < 0) {
-      throw new Error("index must be a positive integer");
-    }
+    indexErrorCheck(index);
     if (index > 0) {
       let current = head;
       for (let i = 0; i < index - 1; i++) {
@@ -71,37 +78,35 @@ const linkedList = function () {
    * @returns The removed node
    */
   const removeFirst = function () {
-    if (!head) {
-      throw new Error("node does not exist");
+    if (head) {
+      let removedNode = head;
+      head = head.link;
+      length--;
+      return removedNode;
     }
-    let removedNode = head;
-    head = head.link;
-    length--;
-    return removedNode;
   };
   /**
    * Removes the last node in the list
    * @returns The removed node
    */
   const removeLast = function () {
-    if (!head) {
-      throw new Error("node does not exist");
-    }
-    let removedNode = tail;
-    if (head === tail) {
-      head = null;
-      tail = null;
-      length = 0;
-    } else {
-      let current = head;
-      while (current.link != tail) {
-        current = current.link;
+    if (head) {
+      let removedNode = tail;
+      if (head === tail) {
+        head = null;
+        tail = null;
+        length = 0;
+      } else {
+        let current = head;
+        while (current.link != tail) {
+          current = current.link;
+        }
+        current.link = null;
+        tail = current;
+        length--;
       }
-      current.link = null;
-      tail = current;
-      length--;
+      return removedNode;
     }
-    return removedNode;
   };
   /**
    * Removes the first instance of the given data from the list
@@ -109,23 +114,22 @@ const linkedList = function () {
    * @returns The removed node
    */
   const remove = function (data) {
-    if (!head) {
-      throw new Error("node does not exist");
-    }
-    if (head.data === data) {
-      return removeFirst();
-    } else {
-      let current = head;
-      let removedNode = null;
-      while (current.link) {
-        if (current.link.data === data) {
-          removedNode = current.link;
-          current.link = current.link.link;
-          length--;
+    if (head) {
+      if (head.data === data) {
+        return removeFirst();
+      } else {
+        let current = head;
+        let removedNode = null;
+        while (current.link) {
+          if (current.link.data === data) {
+            removedNode = current.link;
+            current.link = current.link.link;
+            length--;
+          }
+          current = current.link;
         }
-        current = current.link;
+        return removedNode;
       }
-      return removedNode;
     }
   };
   /**
@@ -134,12 +138,7 @@ const linkedList = function () {
    * @returns The removed node
    */
   const removeAt = function (index) {
-    if (!Number.isInteger(index) || index < 0) {
-      throw new Error("index must be a positive integer");
-    }
-    if (index >= length) {
-      throw new Error("index out of bounds");
-    }
+    indexErrorCheck(index);
     if (index === 0) {
       return removeFirst();
     } else if (index === 1) {
@@ -156,6 +155,7 @@ const linkedList = function () {
       return removedNode;
     }
   };
+
   /**
    * Gets the first node of the list
    * @returns head
@@ -172,10 +172,25 @@ const linkedList = function () {
    */
   const getLength = () => length;
 
+  /**
+   * Gets the Node at the given index
+   * @param {int} index
+   * @returns Node at given index
+   */
+  const getAt = function (index) {
+    indexErrorCheck(index);
+    let current = head;
+    let i = 0;
+    do {
+      if (i === index) {
+        return current;
+      }
+      current = current.link;
+      i++;
+    } while (i <= index);
+  };
+
   return {
-    getHead,
-    getTail,
-    getLength,
     insertFirst,
     insertLast,
     insertAt,
@@ -183,6 +198,10 @@ const linkedList = function () {
     removeLast,
     remove,
     removeAt,
+    getHead,
+    getTail,
+    getLength,
+    getAt,
   };
 };
 

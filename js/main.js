@@ -2,7 +2,8 @@ import { linkedList } from "./LinkedList.js";
 
 const list = linkedList();
 // tests for exception
-// list.removeLast();
+list.removeLast();
+list.removeFirst();
 
 for (let i = 0; i < 10; i++) {
   list.insertLast(`Data ${i}`);
@@ -34,3 +35,7 @@ list.removeAt(3);
 console.log(list.getHead());
 console.log(list.getTail());
 console.log(list.getLength());
+
+console.log(list.getAt(0));
+console.log(list.getAt(1));
+console.log(list.getAt(5));
