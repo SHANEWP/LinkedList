@@ -202,6 +202,20 @@ const linkedList = function () {
     } while (i <= index);
   };
 
+  /**
+   * Converts the linked list to an array
+   * @returns an array of the linked list data
+   */
+  const toArray = function () {
+    let array = Array(length);
+    let current = head;
+    for (let i = 0; i < length; i++) {
+      array[i] = current.data;
+      current = current.link;
+    }
+    return array;
+  };
+
   return {
     insertFirst,
     insertLast,
@@ -214,6 +228,7 @@ const linkedList = function () {
     getTail,
     getLength,
     getAt,
+    toArray,
   };
 };
 

@@ -39,3 +39,5 @@ console.log(list.getLength());
 // console.log(list.getAt(0));
 // console.log(list.getAt(1));
 // console.log(list.getAt(5));
+
+console.log(list.toArray());
