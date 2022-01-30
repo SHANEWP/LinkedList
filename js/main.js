@@ -1,7 +1,7 @@
 import { linkedList } from "./LinkedList.js";
 
 const list = linkedList();
-// tests for exception
+
 list.removeLast();
 list.removeFirst();
 
@@ -36,6 +36,6 @@ console.log(list.getHead());
 console.log(list.getTail());
 console.log(list.getLength());
 
-console.log(list.getAt(0));
-console.log(list.getAt(1));
-console.log(list.getAt(5));
+// console.log(list.getAt(0));
+// console.log(list.getAt(1));
+// console.log(list.getAt(5));

@@ -15,6 +15,7 @@ const linkedList = function () {
       this.link = link;
     }
   }
+
   /**
    * Checks if the given index is valid and throws an Error if it is not
    * @param {int} index
@@ -27,6 +28,7 @@ const linkedList = function () {
       throw new Error("index out of bounds");
     }
   };
+
   /**
    * Adds given data to the beginning of the list
    * @param {*} data
@@ -38,6 +40,7 @@ const linkedList = function () {
     length++;
     return head;
   };
+
   /**
    * Adds given data to the end of the list
    * @param {*} data
@@ -53,6 +56,7 @@ const linkedList = function () {
       return insertFirst(data);
     }
   };
+
   /**
    * Adds given data to the list at the given index
    * @param {*} data
@@ -73,6 +77,7 @@ const linkedList = function () {
     }
     return head;
   };
+
   /**
    * Removes the first node in the list
    * @returns The removed node
@@ -85,6 +90,7 @@ const linkedList = function () {
       return removedNode;
     }
   };
+
   /**
    * Removes the last node in the list
    * @returns The removed node
@@ -108,6 +114,7 @@ const linkedList = function () {
       return removedNode;
     }
   };
+
   /**
    * Removes the first instance of the given data from the list
    * @param {*} data
@@ -132,6 +139,7 @@ const linkedList = function () {
       }
     }
   };
+
   /**
    * Removes the node at the given index
    * @param {int} index
@@ -144,6 +152,7 @@ const linkedList = function () {
     } else if (index === 1) {
       let removedNode = head.link;
       head.link = head.link.link;
+      length--;
       return removedNode;
     } else {
       let current = head;
@@ -152,6 +161,7 @@ const linkedList = function () {
       }
       let removedNode = current.link;
       current.link = current.link.link;
+      length--;
       return removedNode;
     }
   };
@@ -161,11 +171,13 @@ const linkedList = function () {
    * @returns head
    */
   const getHead = () => head;
+
   /**
    * Gets the last node of the list
    * @returns tail
    */
   const getTail = () => tail;
+
   /**
    * Gets the number of nodes in the list
    * @returns length
