@@ -216,6 +216,22 @@ const linkedList = function () {
     return array;
   };
 
+  /**
+   * Creates a copy of the list
+   * @returns the new list
+   */
+  const copy = function () {
+    if (head) {
+      let newList = linkedList();
+
+      for (let i = head; i; i = i.link) {
+        newList.insertLast(i.data);
+      }
+
+      return newList;
+    }
+  };
+
   return {
     insertFirst,
     insertLast,
@@ -229,6 +245,7 @@ const linkedList = function () {
     getLength,
     getAt,
     toArray,
+    copy,
   };
 };
 

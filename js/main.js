@@ -9,21 +9,21 @@ for (let i = 0; i < 10; i++) {
   list.insertLast(`Data ${i}`);
 }
 
-list.remove("hello");
-list.insertAt("2.5", 3);
-list.insertFirst("0");
-list.insertAt("-1", 0);
-list.insertAt("Hi", 1);
+// list.remove("hello");
+// list.insertAt("2.5", 3);
+// list.insertFirst("0");
+// list.insertAt("-1", 0);
+// list.insertAt("Hi", 1);
 
-list.remove("-1");
-list.remove("2.5");
-list.remove(123);
-list.removeFirst();
-list.removeLast();
+// list.remove("-1");
+// list.remove("2.5");
+// list.remove(123);
+// list.removeFirst();
+// list.removeLast();
 
-list.removeAt(0);
-list.removeAt(1);
-list.removeAt(3);
+// list.removeAt(0);
+// list.removeAt(1);
+// list.removeAt(3);
 
 // tests for exceptions
 // list.insertAt("something", "somewhere");
@@ -40,4 +40,12 @@ console.log(list.getLength());
 // console.log(list.getAt(1));
 // console.log(list.getAt(5));
 
+// console.log(list.toArray());
+let listTwo = list.copy();
+// console.log(listTwo.toArray());
+listTwo.insertLast("Data 10");
+listTwo.removeFirst();
+listTwo.removeAt(4);
+
 console.log(list.toArray());
+console.log(listTwo.toArray());
